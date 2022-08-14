@@ -4,42 +4,32 @@ x-service-provisioning-base: &provisioning-base
       GID: ${GID:-0}
       UID: ${UID:-0}
     context: Dockerfile.d/provisioning
-  # command:
-  #   - zsh
-  #   - -ic
-  #   - |
-  #     rm -rf /tmp/provisioning/.terraform.d
-  #     /project/scripts/provisioning.init-with-azure.sh
-  #     /project/scripts/provisioning.init-with-google.sh
+  command:
+    - zsh
+    - -ic
+    - |
+      rm -rf /tmp/provisioning/.terraform.d
+      /project/scripts/provisioning.init-with-azure.sh
+      sleep infinity
   environment:
     - CURRENT_ENV_NAME
     - PROJECT_UNIQUE_ID
-    - AWS_ACCESS_KEY_ID
-    - AWS_ACCOUNT_ID
-    - AWS_DEFAULT_REGION
-    - AWS_SECRET_ACCESS_KEY
     - AZURE_DEFAULT_LOCATION
     - ARM_CLIENT_ID
     - ARM_CLIENT_SECRET
     - ARM_SUBSCRIPTION_ID
     - ARM_TENANT_ID
-    - AZURE_SERVICE_PRINCIPAL=/project/config/${CURRENT_ENV_NAME}/credentials/azure-service-principal.json
-    - CLOUDSDK_CORE_PROJECT
-    - GOOGLE_APPLICATION_CREDENTIALS=/project/config/${CURRENT_ENV_NAME}/credentials/google-cloud-keyfile.json
     - TF_DATA_DIR=/tmp/provisioning/.terraform.d/
     - TF_VAR_allowed_ipaddr_list=${TF_VAR_allowed_ipaddr_list}
-    - TF_VAR_aws_access_key=${AWS_ACCESS_KEY_ID}
-    - TF_VAR_aws_default_region=${AWS_DEFAULT_REGION}
-    - TF_VAR_aws_secret_key=${AWS_SECRET_ACCESS_KEY}
     - TF_VAR_azure_default_location=${AZURE_DEFAULT_LOCATION}
-    - TF_VAR_gcp_project_id=${CLOUDSDK_CORE_PROJECT}
+    - TF_VAR_arm_subscription_id_another
     - TF_VAR_project_unique_id=${PROJECT_UNIQUE_ID}
   user: "${UID:-0}:${GID:-0}"
   volumes:
     - provisioning-home-developer:/home/developer
     - provisioning-home-root:/root # for macOS
-    - /var/run/docker.sock:/var/run/docker.sock
-    - ./Dockerfile.d:/project/Dockerfile.d
+    - ~/.ssh:/home/developer/.ssh:ro
+    - ~/.ssh:/root/.ssh:ro # for macOS
     - ./config:/project/config
     - ./provisioning:/project/workspace
     - ./scripts:/project/scripts

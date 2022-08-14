@@ -1,6 +1,6 @@
-# template.dockerized-provisioning-project
+# Example for Azure Application Gateway with Virtual Machine
 
-[![default](https://github.com/mazgi/template.dockerized-provisioning-project/workflows/default/badge.svg)](https://github.com/mazgi/template.dockerized-provisioning-project/actions?query=workflow%3Adefault)
+[![default](https://github.com/mazgi-showcase/202208.azure-appgw-with-vm/actions/workflows/default.yml/badge.svg)](https://github.com/mazgi-showcase/202208.azure-appgw-with-vm/actions/workflows/default.yml)
 
 ## How to set up
 
