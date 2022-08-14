@@ -1,0 +1,4 @@
+server {
+    server_name ${color}.example.com *.${color}.example.com;
+    add_header 'X-ServerName' '${color}.example.com';
+}
