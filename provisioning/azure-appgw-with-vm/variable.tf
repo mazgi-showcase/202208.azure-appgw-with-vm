@@ -3,3 +3,11 @@ variable "allowed_ipaddr_list" {
   type = list(any)
 }
 variable "azure_default_location" {}
+
+variable "colors" {
+  default = [
+    "blue",
+    "green",
+  ]
+  type = set(string)
+}
