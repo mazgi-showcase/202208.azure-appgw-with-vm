@@ -30,7 +30,6 @@ x-service-provisioning-base: &provisioning-base
     - provisioning-home-root:/root # for macOS
     - ~/.ssh:/home/developer/.ssh:ro
     - ~/.ssh:/root/.ssh:ro # for macOS
-    - ./config:/project/config
     - ./provisioning:/project/workspace
     - ./scripts:/project/scripts
     - ./tmp/provisioning:/tmp/provisioning
